@@ -1,0 +1,61 @@
+{
+  "project": "NQ Intraday ML Research",
+  "development_data": "2022 through August 2026",
+  "validation_warning": "2024 through August 2026 have already been inspected and are development data, not final untouched validation.",
+  "expected_export_rows": {
+    "v2_ext": 108270,
+    "model_rows_ext": 79148,
+    "audit20": 108270,
+    "wf26_trades": 372
+  },
+  "features": [
+    "minute_from_open",
+    "ret_1",
+    "ret_3",
+    "ret_5",
+    "range_pct",
+    "body_pct",
+    "volatility_5",
+    "volume_ratio_5",
+    "vwap_distance",
+    "distance_from_open",
+    "range_position",
+    "barrier_pct"
+  ],
+  "model": {
+    "type": "HistGradientBoostingClassifier",
+    "learning_rate": 0.04,
+    "max_iter": 250,
+    "max_leaf_nodes": 15,
+    "min_samples_leaf": 150,
+    "l2_regularization": 2,
+    "random_state": 42
+  },
+  "walk_forward": {
+    "training_months": 12,
+    "calibration_months": 1,
+    "evaluation": "immediately following month"
+  },
+  "execution": {
+    "entry": "next bar open",
+    "take_profit": "1R",
+    "stop_loss": "1R",
+    "maximum_horizon_bars": 15,
+    "same_bar_tp_sl": "count as stop loss",
+    "round_trip_cost_points": 1,
+    "signal_non_overlap_minutes": 15
+  },
+  "key_results": {
+    "experiment_19_pbo": 0.0571,
+    "experiment_19_train_12m_total_R": 0.3,
+    "experiment_21_direction_auc": 0.5082,
+    "experiment_21_resolution_auc": 0.5774,
+    "experiment_22_total_R": -25.55,
+    "experiment_23_multiclass_auc": 0.5359,
+    "experiment_23_resolution_auc": 0.5771,
+    "experiment_23_direction_auc": 0.5135,
+    "experiment_23_direction_accuracy_pct": 51.14,
+    "experiment_23_resolution_beats_direction_months": "28/32"
+  },
+  "next_experiment": "Experiment 24 — feature-group signal autopsy"
+}
